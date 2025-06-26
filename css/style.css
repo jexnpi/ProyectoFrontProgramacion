@@ -1,0 +1,285 @@
+/* ESTILOS GLOBALES */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* CUERPO */
+body {
+  background-color:#0f2027f3; 
+}
+
+/* HEADER */
+/* IGUAL EN TODAS LAS PAGINAS */
+header {
+  text-align: center;
+  padding: 30px;
+  background-color: #241531;
+  width: 100%;
+}
+
+.logo{
+  width: 80px;
+  height: 80px; 
+    border-radius: 50px;
+}
+
+.nombre-pagina{
+  padding-top: 5px;
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 400;
+  font-size: 25px;
+  color: #00ffcc;
+  margin: 10px 0;
+  text-shadow: 0 0 12px rgba(0, 255, 204, 0.678);
+}
+
+.nombre-alumno{
+  font-size: 7px;
+  font-family: "Orbitron", sans-serif;
+  color: rgba(250, 235, 215, 0.685);
+  padding-top: 10px;
+}
+
+/* PAGINA BIENVENIDA (Jeanette) */
+main {
+  margin-left: 400px;
+  margin-right: 400px;
+  margin-top: 40px;
+  text-align: center;
+  background-color: rgba(30, 12, 46, 0.363);
+  padding: 50px;
+  border-radius: 14px;
+  box-shadow: 0 0 12px rgba(0, 255, 204, 0.2);
+}
+
+.bienvenida{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  }
+
+.bienvenida h2 {
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 400;
+  color: #00ffccc9;
+  text-shadow: 0 0 12px rgba(0, 255, 204, 0.404);
+  font-size: 20px;
+  margin-bottom: 15px;
+  }
+  
+.bienvenida p {
+  margin-bottom: 15px;
+  font-size: 12px;
+  font-family: "Orbitron", sans-serif;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.815);
+  }
+  
+.nombre-cliente{
+  font-family: "Orbitron", sans-serif;
+  padding: 7px;
+  border-radius: 8px;
+  border: 2px #00ffcc63 solid;
+  background-color: rgba(0, 0, 0, 0);
+  width: 200px;
+  font-size: 13px;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  box-shadow: 0 0 12px rgba(0, 255, 204, 0.096);
+  color: rgba(255, 255, 255, 0.815);
+  }
+  
+.boton-continuar-nombre{
+  background-color: #00ffcca2;
+  color:  rgba(44, 9, 75, 0.945);
+  font-weight: bold;
+  font-family: "Orbitron", sans-serif;
+  padding: 5px;
+  margin-left: 10px;
+  font-size: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  }
+  
+.boton-continuar-nombre:hover {
+  background-color: #eeeeee;
+  }
+
+.boton-tema{
+  background-color: #000000d7;
+  margin-top: 100px;
+  margin-left: 20px;
+  color: #00ffccb4;
+  padding: 5px 5px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.boton-tema:hover {
+  background-color: #00ffccb4;
+  color:#000000d7;
+}
+/* FIN PAGINA BIENVENIDA (Jeanette) */ 
+
+
+/*SECCION PRODUCTOS (ESTEBAN) PRINCIPIO*/
+
+.seccion-productos {
+  padding: 20px;
+}
+
+.card-producto {
+  border: 1px solid #00ffccc9;
+
+}
+
+.card-producto img {
+  width: 100px;
+  border-radius: 5px;
+  height: 120px;
+}
+
+.card-producto h3 {
+  font-size: 1rem;
+  margin: 10px 0;
+  color: #00ffcc;
+  font-family: "Orbitron", sans-serif;
+}
+
+.card-producto p {
+  font-size: 1rem;
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 500;
+  color: #00ffccc9;
+  text-shadow: 0 0 12px rgba(0, 255, 204, 0.404);
+  font-size: 15px;
+  margin-bottom: 15px;
+}
+
+.card-producto button:hover {
+  background-color: #218838;
+}
+
+.contenedor-productos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.card-producto {
+  padding: 10px;
+  text-align: center;
+  border-radius: 10px;
+  background-color: #241531;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.card-producto button {
+  padding: 6px 12px;
+  background-color: #28a745;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+
+#ordenar-precio, #ordenar-nombre {
+  cursor: pointer; /* Movi el cursor pointer aca para no repetir codigo*/
+  background-color: rgb(146, 25, 146);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+}
+
+#texto-producto {
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 500;
+  color: #00ffccc9;
+  text-shadow: 0 0 12px rgba(0, 255, 204, 0.404);
+  font-size: 30px;
+  margin-bottom: 15px;
+}
+
+
+/*SECCION PRODUCTOS (ESTEBAN) FINAL */
+
+
+/* PARA LAS OTRAS PANTALLAS */
+#listado-nav{
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+#listado-nav li{
+  list-style-type: none;
+  font-family: "Orbitron", sans-serif;;
+  font-weight: 500;
+  color: #00ffccc9;
+  text-shadow: 0 0 12px rgba(0, 255, 204, 0.404);
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+
+
+/* RESPONSIVE PARA CELULARES */
+/* PAGINA BIENVENIDA */
+@media (max-width: 768px) {
+  main {
+    margin: 40px;
+    padding: 50px 30px;
+  }
+
+  .nombre-pagina {
+    font-size: 18px;
+  }
+
+  .nombre-alumno {
+    font-size: 8px;
+    padding-top: 5px;
+    text-align: center;
+  }
+
+  .bienvenida h2 {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .bienvenida p {
+    font-size: 11px;
+    text-align: center;
+  }
+
+  .nombre-cliente {
+    width: 100%;
+    font-size: 10px;
+  }
+
+  .boton-continuar-nombre {
+    margin-left: 0;
+    margin-top: 10px;
+    font-size: 10px;
+  }
+
+  .boton-tema {
+    margin: 70px 0 0 10px; 
+    font-size: 10px;
+  }
+
+  .logo {
+    width: 60px;
+    height: 60px;
+  }
+}

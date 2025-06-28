@@ -185,6 +185,7 @@ main {
 }
 
 .card-producto button {
+  cursor: pointer;
   padding: 6px 12px;
   background-color: #28a745;
   border: none;
@@ -343,5 +344,24 @@ main {
   margin-top: 20px;
 }
 
+#vaciar-carrito, .boton-eliminar{
+  cursor: pointer;
+  background-color: rgb(226, 13, 13);
+  color: rgb(255, 255, 255);
+  border: none;
+  padding: 5px 10px;
+  margin-top: 5px;
+  font-weight: bold;
+  border-radius:5px;
+  margin-bottom: 10px;
+}
+
+#vaciar-carrito:hover {
+  background-color:  rgba(187, 28, 28, 0.473);
+}
+
+.boton-eliminar:hover {
+  background-color:  rgba(187, 28, 28, 0.473);
+}
 
 

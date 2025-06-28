@@ -291,3 +291,57 @@ main {
     height: 60px;
   }
 }
+
+/* SECCION CARRITO (ESTEBAN) */
+
+.seccion-carrito {
+  padding: 10px;
+  background-color: rgba(0, 255, 204, 0.404);
+}
+
+#items-carrito {
+  padding: 20px;
+  list-style-type: none;
+ /*agrego un text align para que quede como en la referencia*/
+}
+
+.nombre-item, .info-carrito {
+  display: flex;
+  font-size: 20px;
+  list-style-type: none;
+  font-family: "Orbitron", sans-serif;;
+  font-weight: 500;
+  color: #00ffccc9;
+  text-shadow: 0 0 12px rgb(146, 25, 146);
+  font-size: 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+#precio-total{
+  text-align: center;
+  font-size: 20px;
+  list-style-type: none;
+  font-family: "Orbitron", sans-serif;;
+  font-weight: 500;
+  color: #00ffccc9;
+  text-shadow: 0 0 12px rgb(146, 25, 146);
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+#carrito-vacio{
+  display: flex;
+  font-size: 20px;
+  list-style-type: none;
+  font-family: "Orbitron", sans-serif;;
+  font-weight: 500;
+  color: #00ffccc9;
+  text-shadow: 0 0 12px rgb(146, 25, 146);
+  font-size: 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+
+

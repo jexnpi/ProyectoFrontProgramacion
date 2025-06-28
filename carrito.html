@@ -12,7 +12,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Press+Start+2P&display=swap" rel="stylesheet">
-    <!-- JAVA SCRIPT -->
     <script defer src="main.js"></script>
 
 </head>
@@ -26,41 +25,48 @@
                 <h2>Laura Jeanette Pierre - Esteban Hernan Rivero Rodriguez</h2>
             </div>
         </div>
+
+        <nav>
+            <ul id="listado-nav">
+                <a href="index.html">
+                    <li class="links-header"><span>HOME</span></li>
+                </a>
+                <a href="productos.html">
+                    <li class="links-header"><span>PROD</span></li>
+                </a>
+                <a href="carrito.html">
+                    <li class="links-header"><span>CARR</span></li>
+                </a>
+            </ul>
+        </nav>
         
     </header>
     
-    <!-- PANTALLA DE CARRITO -->
- <!--    <section class="carrito-contenedor">
-        <h2>¡Tu carrito!</h2>
-        
-        <div id="items-carrito">
-            <table>
-                <tr>
-                    <th>Producto</th>
-                    <th>Precio</th>
-                    <th>Cantidad</th>
-                </tr>
-                <tr>
-                    <td></td>
-                    <button class="boton-agregar-carrito">+</button>
-                    <button class="boton-sacar-carrito">-</button>
-                </tr>
-                <tr>
-                    <td></td>
-                </tr>
-            </table>-->
-            <!-- <p>No hay elementos en el carrito.</p> -->
-       <!--  </div>
+    <!-- PANTALLA DE CARRITO (ESTEBAN) -->
+    <main>
+        <section class="seccion-productos">
+            <button id="ordenar-nombre" style="margin-left:10px;">Ordenar por Nombre</button>
+            <button id="ordenar-precio" style="margin-left:5px;">Ordenar por Precio</button>
+            <div class="contenedor-productos"></div>
+            <button id="vaciar-carrito" style="margin-top:10px;">Vaciar carrito</button> <!--Agrego el botoin de vaciar carrito-->
+        </section>
 
-        <div class="total-carrito"> -->
-            <!-- <span>Carrito: <span id="contador-carrito">0</span> productos</span> -->
-           <!--  <p><span id="precio-total">$0.00</span></p>
+        <section class="seccion-carrito">
+        <div id="items-carrito">
+            <p id="precio-total">No hay elementos en el carrito.</p>
         </div>
-        <button onclick="vaciarCarrito()" class="boton-vaciar">Vaciar carrito</button>
-    </section>
+
+        <div class="total-carrito">
+            <p><span id="precio-total"></span></p>
+        
+        </div>
+        </section>
+        
+    </main>
     
-    <button class="boton-tema">Tema:</button> --> 
- 
+    
+    <button class="boton-tema">Tema:</button> 
+
 
 </body>
 </html>

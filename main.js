@@ -104,16 +104,21 @@ function mostrarProductos(productos) {
     const contenedor = document.querySelector(".contenedor-productos");
     contenedor.innerHTML = ""; // Limpiar antes de mostrar para evitar duplicados
 
-    productos.forEach(fruta => { 
+    productos.forEach(juegos => { 
         const div = document.createElement("div");
         div.classList.add("card-producto");
         //Creo un nuevo div con el contenido de cada fruta recorrida en el forEach 
         div.innerHTML = ` 
-        <img src="${fruta.imagen}" alt="${fruta.nombre}">
-        <h3>${fruta.nombre}</h3>
-        <p>$${fruta.precio}</p>
-        <button data-id="${fruta.id}">Agregar al carrito</button> 
+        <img src="${juegos.imagen}" alt="${juegos.nombre}">
+        <h3>${juegos.nombre}</h3>
+        <p>$${juegos.precio}</p>
+        <button data-id="${juegos.id}">Agregar al carrito</button> 
         `;
+
+        const boton = div.querySelector("button");
+        boton.addEventListener("click", () => {
+        agregarAlCarrito(juegos);
+        });
 
     contenedor.appendChild(div); //Agregamos al DOM como hijo.
   });
@@ -140,20 +145,119 @@ document.getElementById("ordenar-juegos").addEventListener("click", () => {
 
 
 function ordenarPorNombre() {
-    const frutasOrdenadas = [...productos].sort((a, b) => {
+    const juegosOrdenadas = [...productos].sort((a, b) => {
         return a.nombre.localeCompare(b.nombre); //Uso sort para ordenar de forma que use como metodo de comparacion el nombre de las freutas
     });
-    mostrarProductos(frutasOrdenadas);
+    mostrarProductos(juegosOrdenadas);
 }
 
 function ordenarPorPrecio() {
-    const frutasOrdenadas = [...productos].sort((a, b) => a.precio - b.precio); //Lo mismo pero usando el precio.
-    mostrarProductos(frutasOrdenadas);
+    const juegosOrdenadas = [...productos].sort((a, b) => a.precio - b.precio); //Lo mismo pero usando el precio.
+    mostrarProductos(juegosOrdenadas);
 }
 
+//FUNCION AGREGAR AL CARRITO Y CARRITO EN GENERAL 
+
+let carrito = []
+
+function agregarAlCarrito(producto) {
+    carrito.push(producto);
+    console.log("Carrito actualizado:", carrito);
+    mostrarCarrito();
+}
+
+function mostrarCarrito() {
+    const contenedorCarrito = document.getElementById("items-carrito");
+
+    if (carrito.length === 0) { //agregue esta condicion para que en caso de que no haya ningun objeto en el carrito que pueda imprimir aunque sea esta frase.
+        contenedorCarrito.innerHTML = '<p id="carrito-vacio">No hay elementos en el carrito.</p>';
+        return;
+    }
+
+    contenedorCarrito.innerHTML = '';
+
+    carrito.forEach((producto, index) => {
+        const li = document.createElement("li");
+        li.classList.add("bloque-item");
+
+        li.innerHTML = `
+        <div id=contenedor-carritos>
+        <p class="nombre-item">${producto.nombre} - $${producto.precio} <p/>
+        <button class="boton-eliminar" data-index="${index}">Eliminar</button>
+        </div>
+        `;
+
+        const botonEliminar = li.querySelector("button");
+        botonEliminar.addEventListener("click", () => {
+        eliminarProducto(index); //llamo a la funcion eliminar producto (esta mas abajo)
+        });
+
+        contenedorCarrito.appendChild(li);
+
+        actualizarTotal();
+    });
+}
+
+//ACTUALIZAR EL TOTAL DEL PRECIO (ESTEBAN)
+
+function actualizarContador() {
+    const contador = carrito.length;
+    document.getElementById("contador-carrito").innerText = contador;
+}
+
+function actualizarTotal() {
+    let total = 0;
+    carrito.forEach(juegos => { //Uso el foreach para ir recorriendo el array de juegos, por cada fruta toma el precio y lo suma a Total
+        total += juegos.precio;
+    });
+
+    document.getElementById("precio-total").innerText = `Total: $${total}`;
+}
+
+//BOTON ELIMINAR CARRITO (ESTEBAN)
+
+function eliminarProducto(indice) {
+  carrito.splice(indice, 1);
+  mostrarCarrito(); // Re-renderizo el carrito, para que muestre la version actualizada del carrito 
+  console.log("Producto eliminado. Carrito:", carrito); // muestro en console tambnien que se elimino el producto seleccionado
+    if (carrito.length === 0) { //si el carrito es igual a 0 (osea que no tiene productos) se elimina el carrito para que no se muestre
+    localStorage.removeItem("carrito");
+    actualizarTotal();
+    }
+  guardarCarritoEnStorage(); //aca estoy guardando el carrito en la funcion de LocalStorage, de forma que haya interacciones previas o actuales. 
+}
+
+//GUARDAR CARRITO EN STORAGE
+
+function guardarCarritoEnStorage() {
+    localStorage.setItem("carrito", JSON.stringify(carrito)); //Transformo a JSON nuestro array
+}
+
+function cargarCarritoDesdeStorage() {
+    const carritoGuardado = localStorage.getItem("carrito");
+    if (carritoGuardado) {
+        carrito = JSON.parse(carritoGuardado); //Cargo transformando nuestro Json en array. 
+        mostrarCarrito(); 
+    }
+}
+
+//VACIAR CARRITO
+
+function vaciarCarrito() {
+    carrito = []; // Vacía el array carrito
+    mostrarCarrito(); // Actualiza la vista del carrito
+    localStorage.removeItem("carrito"); // Borra el carrito guardado en localStorage
+    eliminarProducto()
+}
+
+const botonVaciar = document.getElementById("vaciar-carrito");
+if (botonVaciar) {
+    botonVaciar.addEventListener("click", vaciarCarrito);
+}
 
 function init() {
     mostrarProductos(productos);
+    cargarCarritoDesdeStorage();
     document.getElementById("ordenar-nombre").addEventListener("click", ordenarPorNombre);
     document.getElementById("ordenar-precio").addEventListener("click", ordenarPorPrecio);
   }

@@ -142,7 +142,7 @@ function mostrarProductos(productos) {
 
 //FUNCIONES PARA ORDENAR Y MOSTRAR CATEGORIAS 
 
-//Mostrar todo
+/* //Mostrar todo
 document.getElementById("ordenar-todo").addEventListener("click", () => {
   mostrarProductos(productos);
 });
@@ -157,7 +157,7 @@ document.getElementById("ordenar-consolas").addEventListener("click", () => {
 document.getElementById("ordenar-juegos").addEventListener("click", () => {
   let juegos = productos.filter(producto => producto.categoria == "juegos");
   mostrarProductos(juegos);
-});
+}); */
 
 
 function ordenarPorNombre() {
@@ -176,13 +176,25 @@ function ordenarPorPrecio() {
 
 let carrito = []
 
-function agregarAlCarrito(producto) {
+/* function agregarAlCarrito(producto) {
     carrito.push(producto);
     console.log("Carrito actualizado:", carrito);
     mostrarCarrito();
+    guardarCarritoEnStorage()
+} */
+
+function agregarAlCarrito(producto) {
+    carrito.push(producto);
+    console.log("Carrito actualizado:", carrito);
+    guardarCarritoEnStorage();
+
+    // Mostrar carrito sólo si existe el contenedor (estamos en carrito.html)
+    if (document.getElementById("items-carrito")) {
+        mostrarCarrito();
+    }
 }
 
-function mostrarCarrito() {
+/* function mostrarCarrito() {
     const contenedorCarrito = document.getElementById("items-carrito");
 
     if (carrito.length === 0) { //agregue esta condicion para que en caso de que no haya ningun objeto en el carrito que pueda imprimir aunque sea esta frase.
@@ -212,14 +224,46 @@ function mostrarCarrito() {
 
         actualizarTotal();
     });
+} */
+
+function mostrarCarrito() {
+    const contenedorCarrito = document.getElementById("items-carrito");
+    if (!contenedorCarrito) return;  // <--- Agregar esta línea para evitar error si no existe el contenedor
+
+    if (carrito.length === 0) {
+        contenedorCarrito.innerHTML = '<p id="carrito-vacio">No hay elementos en el carrito.</p>';
+        return;
+    }
+
+    contenedorCarrito.innerHTML = '';
+    carrito.forEach((producto, index) => {
+        const li = document.createElement("li");
+        li.classList.add("bloque-item");
+
+        li.innerHTML = `
+        <div id=contenedor-carritos>
+        <p class="nombre-item">${producto.nombre} - $${producto.precio} <p/>
+        <button class="boton-eliminar" data-index="${index}">Eliminar</button>
+        </div>
+        `;
+
+        const botonEliminar = li.querySelector("button");
+        botonEliminar.addEventListener("click", () => {
+        eliminarProducto(index); //llamo a la funcion eliminar producto (esta mas abajo)
+        });
+
+        contenedorCarrito.appendChild(li);
+    });
+
+    actualizarTotal();
 }
 
 //ACTUALIZAR EL TOTAL DEL PRECIO (ESTEBAN)
 
-function actualizarContador() {
+/* function actualizarContador() {
     const contador = carrito.length;
     document.getElementById("contador-carrito").innerText = contador;
-}
+} */
 
 function actualizarTotal() {
     let total = 0;
@@ -247,6 +291,7 @@ function eliminarProducto(indice) {
 
 function guardarCarritoEnStorage() {
     localStorage.setItem("carrito", JSON.stringify(carrito)); //Transformo a JSON nuestro array
+    console.log("Se guardo el carrito")
 }
 
 function cargarCarritoDesdeStorage() {
@@ -272,10 +317,43 @@ if (botonVaciar) {
 }
 
 function init() {
+    const path = window.location.pathname;
+
+    if(path.includes("carrito.html")){
+    cargarCarritoDesdeStorage();
+    mostrarCarrito();
+    /* vaciarCarrito(); */ //Si activamos vaciar carrito de una, se resetea el carrito
+    actualizarContador();
+    }
+
+    if(path.includes("productos.html")){
+    //Mostrar todo
+    document.getElementById("ordenar-todo").addEventListener("click", () => {
     mostrarProductos(productos);
-    /* cargarCarritoDesdeStorage(); */
+    });
+
+    //Mostrar consolas
+    document.getElementById("ordenar-consolas").addEventListener("click", () => {
+    let consolas = productos.filter(producto => producto.categoria == "consolas");
+    mostrarProductos(consolas);
+    });
+
+    //Mostrar juegos
+    document.getElementById("ordenar-juegos").addEventListener("click", () => {
+    let juegos = productos.filter(producto => producto.categoria == "juegos");
+    mostrarProductos(juegos);
+    });
+    
+    mostrarProductos(productos);
     document.getElementById("ordenar-nombre").addEventListener("click", ordenarPorNombre);
     document.getElementById("ordenar-precio").addEventListener("click", ordenarPorPrecio);
   }
+} 
+
+//ANTIGUO INIT
+/* mostrarProductos(productos);
+  /* cargarCarritoDesdeStorage(); */
+  /* document.getElementById("ordenar-nombre").addEventListener("click", ordenarPorNombre);
+  document.getElementById("ordenar-precio").addEventListener("click", ordenarPorPrecio); */
 
 window.onload = init;

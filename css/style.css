@@ -77,7 +77,7 @@ main {
   color: rgba(255, 255, 255, 0.815);
   }
   
-.nombre-cliente{
+#nombre-cliente{
   font-family: "Orbitron", sans-serif;
   padding: 7px;
   border-radius: 8px;
@@ -136,7 +136,10 @@ main {
 
 .card-producto {
   border: 1px solid #00ffccc9;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .card-producto img {
@@ -190,16 +193,22 @@ main {
   margin-top: 10px;
 }
 
-
-#ordenar-precio, #ordenar-nombre {
-  cursor: pointer; /* Movi el cursor pointer aca para no repetir codigo*/
-  background-color: rgb(146, 25, 146);
+/* ACA MODIFIQUE YO */
+.botones-orden-productos button{
+  cursor: pointer;
+  background-color: rgb(97, 7, 97);
   color: white;
   border: none;
   padding: 5px 10px;
   margin-top: 5px;
-  border-radius: 5px;
+  font-weight: bold;
+  border-radius:5px;
 }
+
+.botones-orden-productos button:hover {
+  background-color:  rgba(97, 7, 97, 0.473);
+}
+
 
 #texto-producto {
   font-family: "Press Start 2P", system-ui;
@@ -209,7 +218,6 @@ main {
   font-size: 30px;
   margin-bottom: 15px;
 }
-
 
 /*SECCION PRODUCTOS (ESTEBAN) FINAL */
 

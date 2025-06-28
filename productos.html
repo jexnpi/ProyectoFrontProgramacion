@@ -12,8 +12,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Press+Start+2P&display=swap" rel="stylesheet">
-    <script defer src="main.js"></script>
-    
+<!--     <script defer src="main.js"></script>
+     -->
 </head>
 
 <body>
@@ -47,14 +47,20 @@
         <h2>
             <div id="texto-producto">¡Nuestros productos!</div>
         </h2>
-        <button id="ordenar-nombre" style="margin-left:10px;">Ordenar por Nombre</button>
-        <button id="ordenar-precio" style="margin-left:5px;">Ordenar por Precio</button> <!--Agrego esta seccion para los botones de ordenamiento-->
+        <div class="botones-orden-productos">
+            <button id="ordenar-consolas">Mostrar consolas</button>
+            <button id="ordenar-todo">TODO</button>
+            <button id="ordenar-juegos" >Mostrar juegos</button>
+            <button id="ordenar-nombre" style="margin-left:10px;">Ordenar por Nombre</button>
+            <button id="ordenar-precio" style="margin-left:5px;">Ordenar por Precio</button> <!--Agrego esta seccion para los botones de ordenamiento-->
+        </div>
         <div class="contenedor-productos"></div>
     </section>
     
-    
+
     <button class="boton-tema">Tema:</button> 
 
+    <script src="main.js"></script>
 </body>
 </html>
 

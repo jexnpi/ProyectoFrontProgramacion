@@ -56,8 +56,50 @@ let productos = [
     "activo": 1 }
   ];
 
-//FUNCION MOSTRAR PRODUCTOS
+/* PAGINA DE BIENVENIDA FUNCIONES */
+//fijarse de que diga el nombre tambien en la pantalla de productos
 
+//FUNCION INGRESAR NOMBRE
+function ingresar() {
+  let nombreIngresado = document.getElementById('nombre-cliente').value; //Guardamos el valor ingresado por el cliente en la variable
+    if (nombreIngresado.trim()) { //Validamos que no este vacio y eliminamos espacios
+        sessionStorage.setItem('nombreCliente', nombreIngresado); //Guardamos el nombre usando session storage para que solo este guardado lo que dure la sesion
+        console.log(`Hola ${nombreIngresado}`)
+        window.location.href = 'productos.html'; //Dirige a la pagina de los productos
+    } else {
+        alert('Por favor ingrese su nombre');
+    }
+  }
+
+
+//FUNCION CAMBIAR TEMA
+/* let colorTema = document.getElementById('boton-tema');
+function cambiarColor(){
+  let colorActual = 
+} */
+
+/* // Al cargar la página, aplicar el color guardado si existe
+let colorGuardado = document.getElementById('colorPicker');
+function cambiarColor() {
+  let savedColor = localStorage.getItem('bgColor');
+  if (savedColor) {
+    document.body.style.backgroundColor = savedColor;
+    colorGuardado.value = savedColor;
+    console.log(`Se guardó el color ${savedColor}`)
+  }
+}
+cambiarColor();
+
+// Cambiar el fondo y guardar en localStorage al elegir un color
+colorGuardado.addEventListener('input', function () {
+  let colorSeleccionado = colorGuardado.value;
+  document.body.style.backgroundColor = colorSeleccionado;
+  localStorage.setItem('bgColor', colorSeleccionado);
+}); */
+
+//////////////////////////////////////////////////////////////////
+/*PAGINA DE PRODUCTOS*/
+//FUNCION MOSTRAR PRODUCTOS
 function mostrarProductos(productos) {
     const contenedor = document.querySelector(".contenedor-productos");
     contenedor.innerHTML = ""; // Limpiar antes de mostrar para evitar duplicados
@@ -76,8 +118,26 @@ function mostrarProductos(productos) {
     contenedor.appendChild(div); //Agregamos al DOM como hijo.
   });
 }
+            
 
-//FUNCIONES ORDENAR POR NOMBRE Y PRECIOS
+//FUNCIONES PARA ORDENAR Y MOSTRAR CATEGORIAS 
+//Mostrar todo
+document.getElementById("ordenar-todo").addEventListener("click", () => {
+  mostrarProductos(productos);
+});
+
+//Mostrar consolas
+document.getElementById("ordenar-consolas").addEventListener("click", () => {
+  let consolas = productos.filter(producto => producto.categoria == "consolas");
+  mostrarProductos(consolas);
+});
+
+//Mostrar juegos
+document.getElementById("ordenar-juegos").addEventListener("click", () => {
+  let juegos = productos.filter(producto => producto.categoria == "juegos");
+  mostrarProductos(juegos);
+});
+
 
 function ordenarPorNombre() {
     const frutasOrdenadas = [...productos].sort((a, b) => {

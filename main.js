@@ -126,6 +126,7 @@ function mostrarProductos(productos) {
             
 
 //FUNCIONES PARA ORDENAR Y MOSTRAR CATEGORIAS 
+
 //Mostrar todo
 document.getElementById("ordenar-todo").addEventListener("click", () => {
   mostrarProductos(productos);
@@ -257,7 +258,7 @@ if (botonVaciar) {
 
 function init() {
     mostrarProductos(productos);
-    cargarCarritoDesdeStorage();
+    /* cargarCarritoDesdeStorage(); */
     document.getElementById("ordenar-nombre").addEventListener("click", ordenarPorNombre);
     document.getElementById("ordenar-precio").addEventListener("click", ordenarPorPrecio);
   }

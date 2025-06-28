@@ -73,29 +73,44 @@ function ingresar() {
 
 
 //FUNCION CAMBIAR TEMA
-/* let colorTema = document.getElementById('boton-tema');
-function cambiarColor(){
-  let colorActual = 
-} */
+const botonTema = document.getElementById("boton-tema");
 
-/* // Al cargar la página, aplicar el color guardado si existe
-let colorGuardado = document.getElementById('colorPicker');
-function cambiarColor() {
-  let savedColor = localStorage.getItem('bgColor');
-  if (savedColor) {
-    document.body.style.backgroundColor = savedColor;
-    colorGuardado.value = savedColor;
-    console.log(`Se guardó el color ${savedColor}`)
-  }
+// Cambiar el texto del botón según el tema actual
+function cambiarTextoTema() {
+  let colorActual = document.body.classList.contains("tema-claro") ? "Light" : "Dark";
+  botonTema.innerText = `Tema: ${colorActual}`;
 }
-cambiarColor();
 
-// Cambiar el fondo y guardar en localStorage al elegir un color
-colorGuardado.addEventListener('input', function () {
-  let colorSeleccionado = colorGuardado.value;
-  document.body.style.backgroundColor = colorSeleccionado;
-  localStorage.setItem('bgColor', colorSeleccionado);
-}); */
+// Cambiar el tema y guardar en localStorage
+function cambiarColor() {
+  if (document.body.classList.contains("tema-claro")) {
+    document.body.classList.remove("tema-claro"); // volver a oscuro
+    localStorage.setItem("boton-tema", "Dark");
+  } else {
+    document.body.classList.add("tema-claro"); // pasar a claro
+    localStorage.setItem("boton-tema", "Light");
+  }
+
+  cambiarTextoTema();
+}
+
+// Al cargar la página: aplicar el tema guardado o el oscuro por defecto
+document.addEventListener("DOMContentLoaded", () => {
+  let temaGuardado = localStorage.getItem("boton-tema");
+
+  if (temaGuardado === "Light") {
+    document.body.classList.add("tema-claro");
+  } else {
+    document.body.classList.remove("tema-claro"); // aseguramos oscuro
+    localStorage.setItem("boton-tema", "Dark");   // lo dejamos como default
+  }
+
+  cambiarTextoTema();
+});
+
+// Evento al hacer clic en el botón
+botonTema.addEventListener("click", cambiarColor);
+
 
 //////////////////////////////////////////////////////////////////
 /*PAGINA DE PRODUCTOS*/

@@ -1,4 +1,4 @@
-let productos = [
+/* let productos = [
     {"id": 1, 
     "nombre": "Consola Sony Playstation 5 Slim", 
     "precio": 800000, 
@@ -54,7 +54,27 @@ let productos = [
     "categoria":"juegos",
     "imagen": "https://nextgames.com.ar/img/Public/1040/32125-producto-untitled.jpg",
     "activo": 1 }
-  ];
+  ]; */
+
+  let productos = []; /* Esto inicializa una variable productos como array vacío. Luego vamos a llenarlo con los productos que nos dé el backend. */
+
+// Obtener productos desde el backend al iniciar
+function obtenerProductosDesdeBackend() {
+  fetch('http://localhost:3000/api/products') /* Este fetch hace una petición HTTP (GET) al backend, a la URL que está escuchando en el puerto 3000 y en la ruta /api/products. */
+    .then(res => res.json())
+    .then(data => {
+      console.log("Respuesta del backend:", data);
+      productos = data.payload;  
+
+      if (window.location.pathname.includes("productos.html")) {
+        mostrarProductos(productos);
+      }
+    })
+    .catch(error => {
+      console.error('Error al cargar productos desde el backend:', error);
+    });
+}
+
 
 /* PAGINA DE BIENVENIDA FUNCIONES */
 //fijarse de que diga el nombre tambien en la pantalla de productos
@@ -187,6 +207,7 @@ function agregarAlCarrito(producto) {
     carrito.push(producto);
     console.log("Carrito actualizado:", carrito);
     guardarCarritoEnStorage();
+    mostrarModal(`Agregaste "${producto.nombre}" al carrito.`);
 
     // Mostrar carrito sólo si existe el contenedor (estamos en carrito.html)
     if (document.getElementById("items-carrito")) {
@@ -227,36 +248,74 @@ function agregarAlCarrito(producto) {
 } */
 
 function mostrarCarrito() {
-    const contenedorCarrito = document.getElementById("items-carrito");
-    if (!contenedorCarrito) return;  // <--- Agregar esta línea para evitar error si no existe el contenedor
+  const contenedorCarrito = document.getElementById("items-carrito");
+  if (!contenedorCarrito) return;
 
-    if (carrito.length === 0) {
-        contenedorCarrito.innerHTML = '<p id="carrito-vacio">No hay elementos en el carrito.</p>';
-        return;
+  if (carrito.length === 0) {
+    contenedorCarrito.innerHTML = '<p id="carrito-vacio">No hay elementos en el carrito.</p>';
+    return;
+  }
+
+  contenedorCarrito.innerHTML = '';
+
+  // Agrupar productos por nombre y precio
+  const agrupado = {};
+  carrito.forEach(producto => {
+    const key = `${producto.nombre}-${producto.precio}`;
+    if (!agrupado[key]) agrupado[key] = { ...producto, cantidad: 0 };
+    agrupado[key].cantidad += 1;
+  });
+
+  const productosAgrupados = Object.values(agrupado);
+
+  productosAgrupados.forEach(producto => {
+    const li = document.createElement("li");
+    li.classList.add("bloque-item");
+
+    li.innerHTML = `
+      <div class="contenedor-carritos">
+        <p class="nombre-item">${producto.nombre} - $${producto.precio} x${producto.cantidad}</p>
+        <button class="sumar">+</button>
+        <button class="restar">-</button>
+        <button class="boton-eliminar">Eliminar todos</button>
+      </div>
+    `;
+
+    // Listener para botón +
+    const botonSumar = li.querySelector(".sumar");
+    if (botonSumar) {
+      botonSumar.addEventListener("click", () => {
+        carrito.push({ nombre: producto.nombre, precio: producto.precio });
+        mostrarCarrito();
+      });
     }
 
-    contenedorCarrito.innerHTML = '';
-    carrito.forEach((producto, index) => {
-        const li = document.createElement("li");
-        li.classList.add("bloque-item");
+    // Listener para botón -
+    const botonRestar = li.querySelector(".restar");
+    if (botonRestar) {
+      botonRestar.addEventListener("click", () => {
+        const i = carrito.findIndex(p => p.nombre === producto.nombre && p.precio === producto.precio);
+        if (i !== -1) carrito.splice(i, 1);
+        mostrarCarrito();
+      });
+    }
 
-        li.innerHTML = `
-        <div id=contenedor-carritos>
-        <p class="nombre-item">${producto.nombre} - $${producto.precio} <p/>
-        <button class="boton-eliminar" data-index="${index}">Eliminar</button>
-        </div>
-        `;
+    // Listener para eliminar todos
+    const botonEliminar = li.querySelector(".boton-eliminar");
+    if (botonEliminar) {
+      botonEliminar.addEventListener("click", () => {
+        carrito = carrito.filter(p => !(p.nombre === producto.nombre && p.precio === producto.precio));
+        mostrarCarrito();
+      });
+    }
 
-        const botonEliminar = li.querySelector("button");
-        botonEliminar.addEventListener("click", () => {
-        eliminarProducto(index); //llamo a la funcion eliminar producto (esta mas abajo)
-        });
+    contenedorCarrito.appendChild(li);
+  });
 
-        contenedorCarrito.appendChild(li);
-    });
-
-    actualizarTotal();
+  actualizarTotal();
 }
+
+
 
 //ACTUALIZAR EL TOTAL DEL PRECIO (ESTEBAN)
 
@@ -287,6 +346,8 @@ function eliminarProducto(indice) {
   guardarCarritoEnStorage(); //aca estoy guardando el carrito en la funcion de LocalStorage, de forma que haya interacciones previas o actuales. 
 }
 
+
+
 //GUARDAR CARRITO EN STORAGE
 
 function guardarCarritoEnStorage() {
@@ -315,6 +376,34 @@ const botonVaciar = document.getElementById("vaciar-carrito");
 if (botonVaciar) {
     botonVaciar.addEventListener("click", vaciarCarrito);
 }
+
+//FUNCIONES DE MODAL
+
+function mostrarModal(mensaje) {
+  const modal = document.getElementById("modal-confirmacion");
+  const mensajeModal = document.getElementById("mensaje-modal");
+  mensajeModal.textContent = mensaje;
+  modal.style.display = "flex";
+
+  //cerrar modal al hacer click fuera del contenido
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      cerrarModal();
+    }
+  });
+}
+
+function cerrarModal() {
+  const modal = document.getElementById("modal-confirmacion");
+  if (modal) {
+    modal.style.display = "none";
+  }
+}
+
+
+
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!NO TE OLVIDES DE ACTUALIZAR EL CONTADOR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 
 function init() {
     const path = window.location.pathname;
@@ -347,6 +436,24 @@ function init() {
     mostrarProductos(productos);
     document.getElementById("ordenar-nombre").addEventListener("click", ordenarPorNombre);
     document.getElementById("ordenar-precio").addEventListener("click", ordenarPorPrecio);
+    obtenerProductosDesdeBackend();
+
+    //BOTON MODAL Y SUS LISTENER
+
+    const btnCerrar = document.getElementById("cerrar-modal");
+    if (btnCerrar) {
+    btnCerrar.addEventListener("click", cerrarModal);
+    }
+
+    const modal = document.getElementById("modal-confirmacion");
+    if (modal) {
+      modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      cerrarModal();
+    }
+    });
+    }
+
   }
 } 
 

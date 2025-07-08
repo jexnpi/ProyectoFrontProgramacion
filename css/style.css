@@ -374,7 +374,7 @@ main {
   margin-top: 20px;
 }
 
-#vaciar-carrito, .boton-eliminar{
+#vaciar-carrito, .boton-eliminar, .sumar, .restar{
   cursor: pointer;
   background-color: rgb(226, 13, 13);
   color: rgb(255, 255, 255);
@@ -386,12 +386,61 @@ main {
   margin-bottom: 10px;
 }
 
-#vaciar-carrito:hover {
+.boton-eliminar:hover,.sumar:hover,.restar:hover, #vaciar-carrito:hover {
   background-color:  rgba(187, 28, 28, 0.473);
 }
 
-.boton-eliminar:hover {
-  background-color:  rgba(187, 28, 28, 0.473);
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(36, 21, 49, 0.8); /* Fondo oscuro semitransparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  backdrop-filter: blur(4px); /* ligero desenfoque del fondo */
 }
+
+.modal-contenido {
+  background-color: #241531; /* Color base oscuro de tu header */
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 255, 204, 0.5); /* sombra azul neón */
+  max-width: 320px;
+  width: 90%;
+  text-align: center;
+  font-family: "Orbitron", sans-serif;
+  color: #00ffcc; /* color neón para texto */
+  font-weight: 600;
+  font-size: 18px;
+  text-shadow: 0 0 10px rgba(0, 255, 204, 0.7);
+}
+
+#cerrar-modal {
+  margin-top: 20px;
+  background-color: #00ffcc;
+  color: #241531;
+  font-family: "Orbitron", sans-serif;
+  font-weight: 700;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(0, 255, 204, 0.8);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#cerrar-modal:hover {
+  background-color: #218838; /* verde de hover de tus botones */
+  color: white;
+  box-shadow: 0 0 25px rgba(33, 136, 56, 0.9);
+}
+
+
+
+
 
 

@@ -76,22 +76,7 @@ function obtenerProductosDesdeBackend() {
 }
 
 
-/* PAGINA DE BIENVENIDA FUNCIONES */
-//fijarse de que diga el nombre tambien en la pantalla de productos
-
-//FUNCION INGRESAR NOMBRE
-function ingresar() {
-  let nombreIngresado = document.getElementById('nombre-cliente').value; //Guardamos el valor ingresado por el cliente en la variable
-    if (nombreIngresado.trim()) { //Validamos que no este vacio y eliminamos espacios
-        sessionStorage.setItem('nombreCliente', nombreIngresado); //Guardamos el nombre usando session storage para que solo este guardado lo que dure la sesion
-        console.log(`Hola ${nombreIngresado}`)
-        window.location.href = 'productos.html'; //Dirige a la pagina de los productos
-    } else {
-        alert('Por favor ingrese su nombre');
-    }
-  }
-
-
+/* TODAS LAS PAGINAS FUNCIONES */
 //FUNCION CAMBIAR TEMA
 const botonTema = document.getElementById("boton-tema");
 
@@ -132,6 +117,24 @@ document.addEventListener("DOMContentLoaded", () => {
 botonTema.addEventListener("click", cambiarColor);
 
 
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+/* PAGINA DE BIENVENIDA FUNCIONES */
+//FUNCION INGRESAR NOMBRE
+function ingresar() {
+  let nombreIngresado = document.getElementById('nombre-cliente').value; //Guardamos el valor ingresado por el cliente en la variable
+    if (nombreIngresado.trim()) { //Validamos que no este vacio y eliminamos espacios
+        sessionStorage.setItem('nombreCliente', nombreIngresado); //Guardamos el nombre usando session storage para que solo este guardado lo que dure la sesion
+        console.log(`Hola ${nombreIngresado}`)
+        window.location.href = 'productos.html'; //Dirige a la pagina de los productos
+    } else {
+        alert('Por favor ingrese su nombre');
+    }
+  }
+
+
 //////////////////////////////////////////////////////////////////
 /*PAGINA DE PRODUCTOS*/
 //FUNCION MOSTRAR PRODUCTOS
@@ -139,7 +142,9 @@ function mostrarProductos(productos) {
     const contenedor = document.querySelector(".contenedor-productos");
     contenedor.innerHTML = ""; // Limpiar antes de mostrar para evitar duplicados
 
-    productos.forEach(juegos => { 
+    const productosActivos = productos.filter(producto => producto.activo == 1);
+
+    productosActivos.forEach(juegos => { 
         const div = document.createElement("div");
         div.classList.add("card-producto");
         //Creo un nuevo div con el contenido de cada fruta recorrida en el forEach 
@@ -158,28 +163,9 @@ function mostrarProductos(productos) {
     contenedor.appendChild(div); //Agregamos al DOM como hijo.
   });
 }
-            
 
-//FUNCIONES PARA ORDENAR Y MOSTRAR CATEGORIAS 
-
-/* //Mostrar todo
-document.getElementById("ordenar-todo").addEventListener("click", () => {
-  mostrarProductos(productos);
-});
-
-//Mostrar consolas
-document.getElementById("ordenar-consolas").addEventListener("click", () => {
-  let consolas = productos.filter(producto => producto.categoria == "consolas");
-  mostrarProductos(consolas);
-});
-
-//Mostrar juegos
-document.getElementById("ordenar-juegos").addEventListener("click", () => {
-  let juegos = productos.filter(producto => producto.categoria == "juegos");
-  mostrarProductos(juegos);
-}); */
-
-
+/* BOTONES ORDENAR */
+/* Ordenar por nombre */
 function ordenarPorNombre() {
     const juegosOrdenadas = [...productos].sort((a, b) => {
         return a.nombre.localeCompare(b.nombre); //Uso sort para ordenar de forma que use como metodo de comparacion el nombre de las freutas
@@ -187,21 +173,14 @@ function ordenarPorNombre() {
     mostrarProductos(juegosOrdenadas);
 }
 
+/* Ordenar por precio */
 function ordenarPorPrecio() {
     const juegosOrdenadas = [...productos].sort((a, b) => a.precio - b.precio); //Lo mismo pero usando el precio.
     mostrarProductos(juegosOrdenadas);
 }
 
-//FUNCION AGREGAR AL CARRITO Y CARRITO EN GENERAL 
-
+//FUNCION AGREGAR AL CARRITO
 let carrito = []
-
-/* function agregarAlCarrito(producto) {
-    carrito.push(producto);
-    console.log("Carrito actualizado:", carrito);
-    mostrarCarrito();
-    guardarCarritoEnStorage()
-} */
 
 function agregarAlCarrito(producto) {
     carrito.push(producto);
@@ -215,38 +194,12 @@ function agregarAlCarrito(producto) {
     }
 }
 
-/* function mostrarCarrito() {
-    const contenedorCarrito = document.getElementById("items-carrito");
 
-    if (carrito.length === 0) { //agregue esta condicion para que en caso de que no haya ningun objeto en el carrito que pueda imprimir aunque sea esta frase.
-        contenedorCarrito.innerHTML = '<p id="carrito-vacio">No hay elementos en el carrito.</p>';
-        return;
-    }
 
-    contenedorCarrito.innerHTML = '';
 
-    carrito.forEach((producto, index) => {
-        const li = document.createElement("li");
-        li.classList.add("bloque-item");
-
-        li.innerHTML = `
-        <div id=contenedor-carritos>
-        <p class="nombre-item">${producto.nombre} - $${producto.precio} <p/>
-        <button class="boton-eliminar" data-index="${index}">Eliminar</button>
-        </div>
-        `;
-
-        const botonEliminar = li.querySelector("button");
-        botonEliminar.addEventListener("click", () => {
-        eliminarProducto(index); //llamo a la funcion eliminar producto (esta mas abajo)
-        });
-
-        contenedorCarrito.appendChild(li);
-
-        actualizarTotal();
-    });
-} */
-
+/////////////////////////////////////////////////////////////////////////////////////////
+/* PAGINA DE CARRITO FUNCIONES */
+//FUNCION MOSTRAR CARRITO
 function mostrarCarrito() {
   const contenedorCarrito = document.getElementById("items-carrito");
   if (!contenedorCarrito) return;
@@ -281,7 +234,7 @@ function mostrarCarrito() {
       </div>
     `;
 
-    // Listener para botón +
+    // Listener para botón + (suma producto)
     const botonSumar = li.querySelector(".sumar");
     if (botonSumar) {
       botonSumar.addEventListener("click", () => {
@@ -290,7 +243,7 @@ function mostrarCarrito() {
       });
     }
 
-    // Listener para botón -
+    // Listener para botón - (resta producto)
     const botonRestar = li.querySelector(".restar");
     if (botonRestar) {
       botonRestar.addEventListener("click", () => {
@@ -333,7 +286,7 @@ function actualizarTotal() {
     document.getElementById("precio-total").innerText = `Total: $${total}`;
 }
 
-//BOTON ELIMINAR CARRITO (ESTEBAN)
+//BOTON ELIMINAR DEL CARRITO (ESTEBAN)
 
 function eliminarProducto(indice) {
   carrito.splice(indice, 1);
@@ -348,13 +301,14 @@ function eliminarProducto(indice) {
 
 
 
+/* STORAGE */
 //GUARDAR CARRITO EN STORAGE
-
 function guardarCarritoEnStorage() {
     localStorage.setItem("carrito", JSON.stringify(carrito)); //Transformo a JSON nuestro array
     console.log("Se guardo el carrito")
 }
 
+//CARGAR CARRITO EN STORAGE
 function cargarCarritoDesdeStorage() {
     const carritoGuardado = localStorage.getItem("carrito");
     if (carritoGuardado) {
@@ -364,7 +318,6 @@ function cargarCarritoDesdeStorage() {
 }
 
 //VACIAR CARRITO
-
 function vaciarCarrito() {
     carrito = []; // Vacía el array carrito
     mostrarCarrito(); // Actualiza la vista del carrito
@@ -378,7 +331,6 @@ if (botonVaciar) {
 }
 
 //FUNCIONES DE MODAL
-
 function mostrarModal(mensaje) {
   const modal = document.getElementById("modal-confirmacion");
   const mensajeModal = document.getElementById("mensaje-modal");
@@ -404,7 +356,7 @@ function cerrarModal() {
 
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!NO TE OLVIDES DE ACTUALIZAR EL CONTADOR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-
+/* FUNCION INIT */
 function init() {
     const path = window.location.pathname;
 
@@ -439,7 +391,6 @@ function init() {
     obtenerProductosDesdeBackend();
 
     //BOTON MODAL Y SUS LISTENER
-
     const btnCerrar = document.getElementById("cerrar-modal");
     if (btnCerrar) {
     btnCerrar.addEventListener("click", cerrarModal);
@@ -456,11 +407,5 @@ function init() {
 
   }
 } 
-
-//ANTIGUO INIT
-/* mostrarProductos(productos);
-  /* cargarCarritoDesdeStorage(); */
-  /* document.getElementById("ordenar-nombre").addEventListener("click", ordenarPorNombre);
-  document.getElementById("ordenar-precio").addEventListener("click", ordenarPorPrecio); */
 
 window.onload = init;

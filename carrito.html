@@ -58,7 +58,7 @@
             <button id="ordenar-nombre" style="margin-left:10px;">Ordenar por Nombre</button>
             <button id="ordenar-precio" style="margin-left:5px;">Ordenar por Precio</button> 
         </div> -->
-            <button id="vaciar-carrito" style="margin-top:10px;">Vaciar carrito</button> <!--Agrego el botoin de vaciar carrito-->
+            <!-- <button id="vaciar-carrito" style="margin-top:10px;">Vaciar carrito</button>
         </section>
 
         <section class="seccion-carrito">
@@ -68,9 +68,35 @@
 
         <div class="total-carrito">
             <p><span id="precio-total"></span></p>
+            <button id="confirmar-compra">Confirmar compra</button>
         
         </div>
-        </section>
+        </section> -->
+
+        <div class="seccion-carrito">
+            <table class="tabla-carrito">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="items-carrito">
+      <!-- Aquí se insertan dinámicamente los items del carrito -->
+            </tbody>
+            </table>
+
+        <div id="precio-total">Total: $0</div>
+
+        <div style="text-align: center;">
+            <button id="vaciar-carrito">Vaciar Carrito</button>
+            <button id="confirmar-compra">Confirmar Compra</button>
+        </div>
+
+        <p id="carrito-vacio" style="display:none;">El carrito está vacío</p>
+        </div>
         
     </main>
     

@@ -204,12 +204,23 @@ function mostrarCarrito() {
   const contenedorCarrito = document.getElementById("items-carrito");
   if (!contenedorCarrito) return;
 
+  // Vaciar tbody para re-renderizar
+  contenedorCarrito.innerHTML = "";
+
   if (carrito.length === 0) {
-    contenedorCarrito.innerHTML = '<p id="carrito-vacio">No hay elementos en el carrito.</p>';
+    // Si carrito vacío, mostramos mensaje
+    const filaVacia = document.createElement("tr");
+    const celdaVacia = document.createElement("td");
+    celdaVacia.colSpan = 4;  // ocupa las 4 columnas
+    celdaVacia.style.textAlign = "center";
+    celdaVacia.textContent = "No hay elementos en el carrito.";
+    filaVacia.appendChild(celdaVacia);
+    contenedorCarrito.appendChild(filaVacia);
+
+    // También ocultar total y botones o poner total en $0
+    document.getElementById("precio-total").textContent = "Total: $0";
     return;
   }
-
-  contenedorCarrito.innerHTML = '';
 
   // Agrupar productos por nombre y precio
   const agrupado = {};
@@ -222,47 +233,56 @@ function mostrarCarrito() {
   const productosAgrupados = Object.values(agrupado);
 
   productosAgrupados.forEach(producto => {
-    const li = document.createElement("li");
-    li.classList.add("bloque-item");
+    const tr = document.createElement("tr");
 
-    li.innerHTML = `
-      <div class="contenedor-carritos">
-        <p class="nombre-item">${producto.nombre} - $${producto.precio} x${producto.cantidad}</p>
+    tr.innerHTML = `
+      <td>${producto.nombre}</td>
+      <td style="text-align:center;">${producto.cantidad}</td>
+      <td style="text-align:center;">$${producto.precio}</td>
+      <td style="text-align:right;">
         <button class="sumar">+</button>
         <button class="restar">-</button>
         <button class="boton-eliminar">Eliminar todos</button>
-      </div>
+      </td>
     `;
 
-    // Listener para botón + (suma producto)
-    const botonSumar = li.querySelector(".sumar");
+    // Listeners botones (igual que antes)
+    const botonSumar = tr.querySelector(".sumar");
     if (botonSumar) {
       botonSumar.addEventListener("click", () => {
         carrito.push({ nombre: producto.nombre, precio: producto.precio });
+        guardarCarritoEnStorage();
+        actualizarContador();
         mostrarCarrito();
       });
     }
 
-    // Listener para botón - (resta producto)
-    const botonRestar = li.querySelector(".restar");
+    const botonRestar = tr.querySelector(".restar");
     if (botonRestar) {
       botonRestar.addEventListener("click", () => {
         const i = carrito.findIndex(p => p.nombre === producto.nombre && p.precio === producto.precio);
         if (i !== -1) carrito.splice(i, 1);
+        if (carrito.length === 0) {
+          localStorage.removeItem("carrito");
+          actualizarTotal();
+        }
         mostrarCarrito();
+        guardarCarritoEnStorage();
+        actualizarContador();
       });
     }
 
-    // Listener para eliminar todos
-    const botonEliminar = li.querySelector(".boton-eliminar");
+    const botonEliminar = tr.querySelector(".boton-eliminar");
     if (botonEliminar) {
       botonEliminar.addEventListener("click", () => {
         carrito = carrito.filter(p => !(p.nombre === producto.nombre && p.precio === producto.precio));
         mostrarCarrito();
+        guardarCarritoEnStorage();
+        actualizarContador();
       });
     }
 
-    contenedorCarrito.appendChild(li);
+    contenedorCarrito.appendChild(tr);
   });
 
   actualizarTotal();
@@ -270,12 +290,18 @@ function mostrarCarrito() {
 
 
 
+
 //ACTUALIZAR EL TOTAL DEL PRECIO (ESTEBAN)
 
-/* function actualizarContador() {
-    const contador = carrito.length;
-    document.getElementById("contador-carrito").innerText = contador;
-} */
+function actualizarContador() {
+  const contador = carrito.length;
+  const contadorElemento = document.getElementById("contador-carrito");
+  if (contadorElemento) {
+    contadorElemento.innerText = contador;
+  }
+}
+
+
 
 function actualizarTotal() {
     let total = 0;
@@ -309,12 +335,19 @@ function guardarCarritoEnStorage() {
 }
 
 //CARGAR CARRITO EN STORAGE
-function cargarCarritoDesdeStorage() {
+/* function cargarCarritoDesdeStorage() {
     const carritoGuardado = localStorage.getItem("carrito");
     if (carritoGuardado) {
         carrito = JSON.parse(carritoGuardado); //Cargo transformando nuestro Json en array. 
         mostrarCarrito(); 
     }
+} */
+
+function cargarCarritoDesdeStorage() {
+  const carritoGuardado = localStorage.getItem("carrito");
+  if (carritoGuardado) {
+    carrito = JSON.parse(carritoGuardado);
+  }
 }
 
 //VACIAR CARRITO
@@ -353,6 +386,17 @@ function cerrarModal() {
 }
 
 
+const botonConfirmar = document.getElementById("confirmar-compra");
+if (botonConfirmar) {
+  botonConfirmar.addEventListener("click", () => {
+    vaciarCarrito();         // Borra el carrito y actualiza la vista
+    actualizarContador();    // Resetea el número del contador
+    alert("¡Gracias por tu compra!");
+    window.location.href = "index.html";
+  });
+}
+
+
 
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!NO TE OLVIDES DE ACTUALIZAR EL CONTADOR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -365,13 +409,20 @@ function init() {
     mostrarCarrito();
     /* vaciarCarrito(); */ //Si activamos vaciar carrito de una, se resetea el carrito
     actualizarContador();
+
     }
 
     if(path.includes("productos.html")){
+    cargarCarritoDesdeStorage();     // ⬅️ recupera el carrito si había algo
+    actualizarContador();            // ⬅️ actualiza el número de productos en el ícono
+
     //Mostrar todo
     document.getElementById("ordenar-todo").addEventListener("click", () => {
     mostrarProductos(productos);
     });
+
+  // ...
+
 
     //Mostrar consolas
     document.getElementById("ordenar-consolas").addEventListener("click", () => {

@@ -13,15 +13,15 @@ body {
 
 /* TEMA CLARO */
 .tema-claro {
-  background-color: rgba(201, 198, 198, 0.986)/*  rgba(138, 145, 145, 0.308) */;
+  background-color: rgba(201, 198, 198, 0.986);
   color: black;
 }
-.tema-claro main{
-    background-color: rgb(119, 23, 197);
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.815);
+.tema-claro main {
+  background-color: rgb(119, 23, 197);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.815);
 }
 
-#boton-tema{
+#boton-tema {
   background-color: #000000d7;
   margin-top: 100px;
   margin-left: 20px;
@@ -33,29 +33,24 @@ body {
   border-radius: 5px;
   cursor: pointer;
 }
-
 #boton-tema:hover {
   background-color: #00ffccb4;
-  color:#000000d7;
+  color: #000000d7;
 }
 
-
 /* HEADER */
-/* IGUAL EN TODAS LAS PAGINAS */
 header {
   text-align: center;
   padding: 30px;
   background-color: #241531;
   width: 100%;
 }
-
-.logo{
+.logo {
   width: 80px;
-  height: 80px; 
-    border-radius: 50px;
+  height: 80px;
+  border-radius: 50px;
 }
-
-.nombre-pagina{
+.nombre-pagina {
   padding-top: 5px;
   font-family: "Press Start 2P", system-ui;
   font-weight: 400;
@@ -64,15 +59,14 @@ header {
   margin: 10px 0;
   text-shadow: 0 0 12px rgba(0, 255, 204, 0.678);
 }
-
-.nombre-alumno{
+.nombre-alumno {
   font-size: 7px;
   font-family: "Orbitron", sans-serif;
   color: rgba(250, 235, 215, 0.685);
   padding-top: 10px;
 }
 
-/* PAGINA BIENVENIDA (Jeanette) */
+/* PAGINA BIENVENIDA */
 main {
   margin-left: 400px;
   margin-right: 400px;
@@ -84,12 +78,11 @@ main {
   box-shadow: 0 0 12px rgba(0, 255, 204, 0.2);
 }
 
-.bienvenida{
+.bienvenida {
   display: flex;
   flex-direction: column;
   align-items: center;
-  }
-
+}
 .bienvenida h2 {
   font-family: "Press Start 2P", system-ui;
   font-weight: 400;
@@ -97,17 +90,15 @@ main {
   text-shadow: 0 0 12px rgba(0, 255, 204, 0.404);
   font-size: 20px;
   margin-bottom: 15px;
-  }
-  
+}
 .bienvenida p {
   margin-bottom: 15px;
   font-size: 12px;
   font-family: "Orbitron", sans-serif;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.815);
-  }
-  
-#nombre-cliente{
+}
+#nombre-cliente {
   font-family: "Orbitron", sans-serif;
   padding: 7px;
   border-radius: 8px;
@@ -119,11 +110,10 @@ main {
   margin-top: 15px;
   box-shadow: 0 0 12px rgba(0, 255, 204, 0.096);
   color: rgba(255, 255, 255, 0.815);
-  }
-  
-.boton-continuar-nombre{
+}
+.boton-continuar-nombre {
   background-color: #00ffcca2;
-  color:  rgba(44, 9, 75, 0.945);
+  color: rgba(44, 9, 75, 0.945);
   font-weight: bold;
   font-family: "Orbitron", sans-serif;
   padding: 5px;
@@ -132,88 +122,52 @@ main {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  }
-  
+}
 .boton-continuar-nombre:hover {
   background-color: #eeeeee;
-  }
-
-#boton-tema{
-  background-color: #000000d7;
-  margin-top: 100px;
-  margin-left: 20px;
-  color: #00ffccb4;
-  padding: 5px 5px;
-  font-family: "Orbitron", sans-serif;
-  font-size: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
-#boton-tema:hover {
-  background-color: #00ffccb4;
-  color:#000000d7;
-}
-/* FIN PAGINA BIENVENIDA (Jeanette) */ 
-
-
-/*SECCION PRODUCTOS (ESTEBAN) PRINCIPIO*/
-
+/* SECCION PRODUCTOS */
 .seccion-productos {
   padding: 20px;
 }
-
-.card-producto {
-  border: 1px solid #00ffccc9;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.card-producto img {
-  width: 100px;
-  border-radius: 5px;
-  height: 120px;
-}
-
-.card-producto h3 {
-  font-size: 1rem;
-  margin: 10px 0;
-  color: #00ffcc;
-  font-family: "Orbitron", sans-serif;
-}
-
-.card-producto p {
-  font-size: 1rem;
-  font-family: "Press Start 2P", system-ui;
-  font-weight: 500;
-  color: #00ffccc9;
-  text-shadow: 0 0 12px rgba(0, 255, 204, 0.404);
-  font-size: 15px;
-  margin-bottom: 15px;
-}
-
-.card-producto button:hover {
-  background-color: #218838;
-}
-
 .contenedor-productos {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 20px;
   padding: 20px;
 }
-
 .card-producto {
   padding: 10px;
   text-align: center;
   border-radius: 10px;
   background-color: #241531;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  border: 1px solid #00ffccc9;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
-
+.card-producto img {
+  width: 100px;
+  border-radius: 5px;
+  height: 120px;
+}
+.card-producto h3 {
+  font-size: 1rem;
+  margin: 10px 0;
+  color: #00ffcc;
+  font-family: "Orbitron", sans-serif;
+}
+.card-producto p {
+  font-size: 15px;
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 500;
+  color: #00ffccc9;
+  text-shadow: 0 0 12px rgba(0, 255, 204, 0.404);
+  margin-bottom: 15px;
+}
 .card-producto button {
   cursor: pointer;
   padding: 6px 12px;
@@ -223,9 +177,10 @@ main {
   border-radius: 5px;
   margin-top: 10px;
 }
-
-/* ACA MODIFIQUE YO */
-.botones-orden-productos button{
+.card-producto button:hover {
+  background-color: #218838;
+}
+.botones-orden-productos button {
   cursor: pointer;
   background-color: rgb(97, 7, 97);
   color: white;
@@ -233,14 +188,11 @@ main {
   padding: 5px 10px;
   margin-top: 5px;
   font-weight: bold;
-  border-radius:5px;
+  border-radius: 5px;
 }
-
 .botones-orden-productos button:hover {
-  background-color:  rgba(97, 7, 97, 0.473);
+  background-color: rgba(97, 7, 97, 0.473);
 }
-
-
 #texto-producto {
   font-family: "Press Start 2P", system-ui;
   font-weight: 500;
@@ -250,20 +202,15 @@ main {
   margin-bottom: 15px;
 }
 
-/*SECCION PRODUCTOS (ESTEBAN) FINAL */
-
-
-/* PARA LAS OTRAS PANTALLAS */
-#listado-nav{
-    padding-top: 10px;
-    display: flex;
-    justify-content: space-around;
-
+/* LISTADO NAV */
+#listado-nav {
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-around;
 }
-
-#listado-nav li{
+#listado-nav li {
   list-style-type: none;
-  font-family: "Orbitron", sans-serif;;
+  font-family: "Orbitron", sans-serif;
   font-weight: 500;
   color: #00ffccc9;
   text-shadow: 0 0 12px rgba(0, 255, 204, 0.404);
@@ -271,154 +218,211 @@ main {
   margin-bottom: 15px;
 }
 
-
-
-/* RESPONSIVE PARA CELULARES */
-/* PAGINA BIENVENIDA */
+/* RESPONSIVE */
 @media (max-width: 768px) {
   main {
     margin: 40px;
     padding: 50px 30px;
   }
-
   .nombre-pagina {
     font-size: 18px;
   }
-
   .nombre-alumno {
     font-size: 8px;
     padding-top: 5px;
     text-align: center;
   }
-
   .bienvenida h2 {
     font-size: 16px;
     text-align: center;
   }
-
   .bienvenida p {
     font-size: 11px;
     text-align: center;
   }
-
   .nombre-cliente {
     width: 100%;
     font-size: 10px;
   }
-
   .boton-continuar-nombre {
     margin-left: 0;
     margin-top: 10px;
     font-size: 10px;
   }
-
   .boton-tema {
-    margin: 70px 0 0 10px; 
+    margin: 70px 0 0 10px;
     font-size: 10px;
   }
-
   .logo {
     width: 60px;
     height: 60px;
   }
 }
 
-/* SECCION CARRITO (ESTEBAN) */
-
+/* SECCION CARRITO ESTILIZADA COMO TABLA */
 .seccion-carrito {
-  padding: 10px;
-  background-color: rgba(0, 255, 204, 0.404);
-}
-
-#items-carrito {
   padding: 20px;
-  list-style-type: none;
- /*agrego un text align para que quede como en la referencia*/
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #241531;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
+  font-family: "Orbitron", sans-serif;
+  color: #00ffcc;
 }
 
-.nombre-item, .info-carrito {
-  display: flex;
-  font-size: 20px;
-  list-style-type: none;
-  font-family: "Orbitron", sans-serif;;
-  font-weight: 500;
-  color: #00ffccc9;
-  text-shadow: 0 0 12px rgb(146, 25, 146);
-  font-size: 20px;
-  margin-bottom: 20px;
-  margin-top: 20px;
+/* Tabla carrito */
+.tabla-carrito {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #241531;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-#precio-total{
+.tabla-carrito thead {
+  background-color: #1a1a1a;
+  color: #00ffcc;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.tabla-carrito th,
+.tabla-carrito td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #00ffcc88;
+}
+
+.tabla-carrito tbody tr:hover {
+  background-color: #333;
+}
+
+.tabla-carrito td:nth-child(2),
+.tabla-carrito td:nth-child(3) {
   text-align: center;
-  font-size: 20px;
-  list-style-type: none;
-  font-family: "Orbitron", sans-serif;;
-  font-weight: 500;
-  color: #00ffccc9;
-  text-shadow: 0 0 12px rgb(146, 25, 146);
-  font-size: 20px;
-  margin-bottom: 15px;
+  width: 15%;
 }
 
-#carrito-vacio{
-  display: flex;
-  font-size: 20px;
-  list-style-type: none;
-  font-family: "Orbitron", sans-serif;;
-  font-weight: 500;
-  color: #00ffccc9;
-  text-shadow: 0 0 12px rgb(146, 25, 146);
-  font-size: 20px;
-  margin-bottom: 20px;
-  margin-top: 20px;
+.tabla-carrito td:nth-child(4) {
+  text-align: center;
+  width: 20%;
 }
 
-#vaciar-carrito, .boton-eliminar, .sumar, .restar{
-  cursor: pointer;
-  background-color: rgb(226, 13, 13);
-  color: rgb(255, 255, 255);
+/* Botones en la tabla */
+.tabla-carrito button {
+  background-color: #00ffccaa;
   border: none;
-  padding: 5px 10px;
-  margin-top: 5px;
+  color: #241531;
+  padding: 6px 12px;
+  margin: 0 4px;
   font-weight: bold;
-  border-radius:5px;
-  margin-bottom: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
 }
 
-.boton-eliminar:hover,.sumar:hover,.restar:hover, #vaciar-carrito:hover {
-  background-color:  rgba(187, 28, 28, 0.473);
+.tabla-carrito button:hover {
+  background-color: #00bfa5;
+  color: white;
 }
 
+/* Total del precio */
+#precio-total {
+  margin-top: 15px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: right;
+  color: #00ffcc;
+  text-shadow: 0 0 10px rgb(0, 255, 204);
+}
+
+/* Botones vaciar y confirmar */
+.seccion-carrito > div {
+  width: 100%;
+  max-width: 900px;
+  margin: 20px auto 40px;
+  text-align: center;
+}
+
+.seccion-carrito button#vaciar-carrito,
+.seccion-carrito button#confirmar-compra {
+  background-color: #00ffccaa;
+  color: #241531;
+  border: none;
+  padding: 10px 22px;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 6px;
+  margin: 0 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.seccion-carrito button#vaciar-carrito:hover,
+.seccion-carrito button#confirmar-compra:hover {
+  background-color: #00bfa5;
+  color: white;
+}
+
+/* Mensaje carrito vacío */
+#carrito-vacio {
+  text-align: center;
+  font-size: 18px;
+  color: #ffffffbb;
+  margin-top: 30px;
+  font-family: "Orbitron", sans-serif;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .tabla-carrito, #precio-total, .seccion-carrito > div {
+    width: 95%;
+  }
+
+  .tabla-carrito th, .tabla-carrito td {
+    padding: 8px 10px;
+  }
+
+  .tabla-carrito button {
+    padding: 5px 8px;
+    font-size: 0.9rem;
+  }
+
+  #precio-total {
+    text-align: center;
+  }
+}
+
+/* MODAL */
 .modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(36, 21, 49, 0.8); /* Fondo oscuro semitransparente */
+  background-color: rgba(36, 21, 49, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  backdrop-filter: blur(4px); /* ligero desenfoque del fondo */
+  backdrop-filter: blur(4px);
 }
-
 .modal-contenido {
-  background-color: #241531; /* Color base oscuro de tu header */
+  background-color: #241531;
   padding: 25px 30px;
   border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0, 255, 204, 0.5); /* sombra azul neón */
+  box-shadow: 0 0 20px rgba(0, 255, 204, 0.5);
   max-width: 320px;
   width: 90%;
   text-align: center;
   font-family: "Orbitron", sans-serif;
-  color: #00ffcc; /* color neón para texto */
+  color: #00ffcc;
   font-weight: 600;
   font-size: 18px;
   text-shadow: 0 0 10px rgba(0, 255, 204, 0.7);
 }
-
 #cerrar-modal {
   margin-top: 20px;
   background-color: #00ffcc;
@@ -432,15 +436,8 @@ main {
   box-shadow: 0 0 15px rgba(0, 255, 204, 0.8);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
-
 #cerrar-modal:hover {
-  background-color: #218838; /* verde de hover de tus botones */
+  background-color: #218838;
   color: white;
   box-shadow: 0 0 25px rgba(33, 136, 56, 0.9);
 }
-
-
-
-
-
-

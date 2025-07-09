@@ -129,6 +129,7 @@ function ingresar() {
         sessionStorage.setItem('nombreCliente', nombreIngresado); //Guardamos el nombre usando session storage para que solo este guardado lo que dure la sesion
         console.log(`Hola ${nombreIngresado}`)
         window.location.href = 'productos.html'; //Dirige a la pagina de los productos
+        vaciarCarrito();
     } else {
         alert('Por favor ingrese su nombre');
     }
@@ -152,13 +153,24 @@ function mostrarProductos(productos) {
         <img src="${juegos.imagen}" alt="${juegos.nombre}">
         <h3>${juegos.nombre}</h3>
         <p>$${juegos.precio}</p>
-        <button data-id="${juegos.id}">Agregar al carrito</button> 
+        <button data-id="${juegos.id}" class="agregar-carrito">Agregar al carrito</button> 
+        <button data-id="${juegos.id}" class="eliminar-carrito">Eliminar del carrito</button> 
         `;
 
-        const boton = div.querySelector("button");
-        boton.addEventListener("click", () => {
-        agregarAlCarrito(juegos);
+        const botonAgregarCarrito = div.querySelector(".agregar-carrito");
+        botonAgregarCarrito.addEventListener("click", () => {
+          agregarAlCarrito(juegos);
         });
+
+        const botonEliminarCarrito = div.querySelector(".eliminar-carrito");
+        botonEliminarCarrito.addEventListener("click", () => {
+          carrito = carrito.filter(p => !(p.nombre === juegos.nombre && p.precio === juegos.precio));
+          guardarCarritoEnStorage();
+          mostrarModal(`Eliminaste "${juegos.nombre}" del carrito.`);
+          mostrarCarrito();
+        });
+
+
 
     contenedor.appendChild(div); //Agregamos al DOM como hijo.
   });
@@ -352,13 +364,28 @@ function cerrarModal() {
   }
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  const nombreCliente = sessionStorage.getItem("nombreCliente");
+  const saludo = document.getElementById("saludo-cliente");
+
+  if (saludo && nombreCliente) {
+    saludo.textContent = `¡Bienvenido, ${nombreCliente}!`;
+  }
+});
 
 
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!NO TE OLVIDES DE ACTUALIZAR EL CONTADOR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 /* FUNCION INIT */
 function init() {
+    const nombreCliente = sessionStorage.getItem("nombreCliente");
     const path = window.location.pathname;
+  
+    if (!nombreCliente && (path.includes("productos.html") || path.includes("carrito.html"))) {
+      alert("Por favor ingrese su nombre");
+      window.location.href = "index.html";
+      return;
+    }
 
     if(path.includes("carrito.html")){
     cargarCarritoDesdeStorage();
@@ -368,21 +395,22 @@ function init() {
     }
 
     if(path.includes("productos.html")){
+      cargarCarritoDesdeStorage(); 
     //Mostrar todo
     document.getElementById("ordenar-todo").addEventListener("click", () => {
-    mostrarProductos(productos);
+      mostrarProductos(productos);
     });
 
     //Mostrar consolas
     document.getElementById("ordenar-consolas").addEventListener("click", () => {
     let consolas = productos.filter(producto => producto.categoria == "consolas");
-    mostrarProductos(consolas);
+      mostrarProductos(consolas);
     });
 
     //Mostrar juegos
     document.getElementById("ordenar-juegos").addEventListener("click", () => {
     let juegos = productos.filter(producto => producto.categoria == "juegos");
-    mostrarProductos(juegos);
+      mostrarProductos(juegos);
     });
     
     mostrarProductos(productos);

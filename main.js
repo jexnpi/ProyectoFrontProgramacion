@@ -207,8 +207,6 @@ function agregarAlCarrito(producto) {
 }
 
 
-
-
 /////////////////////////////////////////////////////////////////////////////////////////
 /* PAGINA DE CARRITO FUNCIONES */
 //FUNCION MOSTRAR CARRITO
@@ -300,11 +298,7 @@ function mostrarCarrito() {
   actualizarTotal();
 }
 
-
-
-
-//ACTUALIZAR EL TOTAL DEL PRECIO (ESTEBAN)
-
+//ACTUALIZAR EL TOTAL DEL PRECIO
 function actualizarContador() {
   const contador = carrito.length;
   const contadorElemento = document.getElementById("contador-carrito");
@@ -312,8 +306,6 @@ function actualizarContador() {
     contadorElemento.innerText = contador;
   }
 }
-
-
 
 function actualizarTotal() {
     let total = 0;
@@ -324,8 +316,7 @@ function actualizarTotal() {
     document.getElementById("precio-total").innerText = `Total: $${total}`;
 }
 
-//BOTON ELIMINAR DEL CARRITO (ESTEBAN)
-
+//BOTON ELIMINAR DEL CARRITO
 function eliminarProducto(indice) {
   carrito.splice(indice, 1);
   mostrarCarrito(); // Re-renderizo el carrito, para que muestre la version actualizada del carrito 
@@ -337,8 +328,7 @@ function eliminarProducto(indice) {
   guardarCarritoEnStorage(); //aca estoy guardando el carrito en la funcion de LocalStorage, de forma que haya interacciones previas o actuales. 
 }
 
-
-
+////////////////////////////////////////////////////////////////////////////
 /* STORAGE */
 //GUARDAR CARRITO EN STORAGE
 function guardarCarritoEnStorage() {
@@ -346,14 +336,6 @@ function guardarCarritoEnStorage() {
     console.log("Se guardo el carrito")
 }
 
-//CARGAR CARRITO EN STORAGE
-/* function cargarCarritoDesdeStorage() {
-    const carritoGuardado = localStorage.getItem("carrito");
-    if (carritoGuardado) {
-        carrito = JSON.parse(carritoGuardado); //Cargo transformando nuestro Json en array. 
-        mostrarCarrito(); 
-    }
-} */
 
 function cargarCarritoDesdeStorage() {
   const carritoGuardado = localStorage.getItem("carrito");
@@ -367,7 +349,8 @@ function vaciarCarrito() {
     carrito = []; // Vacía el array carrito
     mostrarCarrito(); // Actualiza la vista del carrito
     localStorage.removeItem("carrito"); // Borra el carrito guardado en localStorage
-    eliminarProducto()
+    actualizarTotal();
+    actualizarContador();
 }
 
 const botonVaciar = document.getElementById("vaciar-carrito");
@@ -416,10 +399,6 @@ if (botonConfirmar) {
   });
 }
 
-
-
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!NO TE OLVIDES DE ACTUALIZAR EL CONTADOR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 /* FUNCION INIT */
 function init() {
     const nombreCliente = sessionStorage.getItem("nombreCliente");
@@ -440,16 +419,13 @@ function init() {
     }
 
     if(path.includes("productos.html")){
-    cargarCarritoDesdeStorage();     // ⬅️ recupera el carrito si había algo
-    actualizarContador();            // ⬅️ actualiza el número de productos en el ícono
+    cargarCarritoDesdeStorage();   
+    actualizarContador();          
 
     //Mostrar todo
     document.getElementById("ordenar-todo").addEventListener("click", () => {
       mostrarProductos(productos);
     });
-
-  // ...
-
 
     //Mostrar consolas
     document.getElementById("ordenar-consolas").addEventListener("click", () => {

@@ -66,6 +66,22 @@ header {
   padding-top: 10px;
 }
 
+/* NAV */
+#listado-nav {
+  padding-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+#listado-nav li {
+  list-style-type: none;
+  font-weight: 500;
+  color: #00ffccc9;
+  text-shadow: 0 0 12px rgba(0, 255, 204, 0.404);
+  font-size: 30px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
 /* PAGINA BIENVENIDA */
 main {
   max-width: 800px;
@@ -226,22 +242,6 @@ main {
   word-wrap: break-word;
 }
 
-/* NAV */
-#listado-nav {
-  padding-top: 15px;
-  display: flex;
-  justify-content: center;
-}
-#listado-nav li {
-  list-style-type: none;
-  font-weight: 500;
-  color: #00ffccc9;
-  text-shadow: 0 0 12px rgba(0, 255, 204, 0.404);
-  font-size: 30px;
-  margin-left: 15px;
-  margin-right: 15px;
-}
-
 /* CARRITO - ESTILO TABLA */
 .seccion-carrito {
   padding: 20px;
@@ -346,6 +346,57 @@ main {
   margin-top: 30px;
   font-family: "Orbitron", sans-serif;
 }
+
+/* MODAL */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(36, 21, 49, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  backdrop-filter: blur(4px);
+}
+
+.modal-contenido {
+  background-color: #241531;
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 255, 204, 0.5);
+  max-width: 320px;
+  width: 90%;
+  text-align: center;
+  font-family: "Orbitron", sans-serif;
+  color: #00ffcc;
+  font-weight: 600;
+  font-size: 18px;
+  text-shadow: 0 0 10px rgba(0, 255, 204, 0.7);
+}
+
+#cerrar-modal {
+  margin-top: 20px;
+  background-color: #00ffcc;
+  color: #241531;
+  font-family: "Orbitron", sans-serif;
+  font-weight: 700;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(0, 255, 204, 0.8);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#cerrar-modal:hover {
+  background-color: #218838;
+  color: white;
+  box-shadow: 0 0 25px rgba(33, 136, 56, 0.9);
+}
+
 /* RESPONSIVE GENERAL */
 @media (max-width: 768px) {
   main {
@@ -411,55 +462,6 @@ main {
   }
 }
 
-/* MODAL */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(36, 21, 49, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  backdrop-filter: blur(4px);
-}
-
-.modal-contenido {
-  background-color: #241531;
-  padding: 25px 30px;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0, 255, 204, 0.5);
-  max-width: 320px;
-  width: 90%;
-  text-align: center;
-  font-family: "Orbitron", sans-serif;
-  color: #00ffcc;
-  font-weight: 600;
-  font-size: 18px;
-  text-shadow: 0 0 10px rgba(0, 255, 204, 0.7);
-}
-
-#cerrar-modal {
-  margin-top: 20px;
-  background-color: #00ffcc;
-  color: #241531;
-  font-family: "Orbitron", sans-serif;
-  font-weight: 700;
-  border: none;
-  padding: 8px 18px;
-  border-radius: 8px;
-  cursor: pointer;
-  box-shadow: 0 0 15px rgba(0, 255, 204, 0.8);
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-#cerrar-modal:hover {
-  background-color: #218838;
-  color: white;
-  box-shadow: 0 0 25px rgba(33, 136, 56, 0.9);
-}
 @media (max-width: 600px) {
   .seccion-carrito {
     padding: 10px;

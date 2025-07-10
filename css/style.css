@@ -17,8 +17,8 @@ body {
   color: black;
 }
 .tema-claro main{
-    background-color: rgb(72, 21, 114);
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.815);
+  background-color: rgb(72, 21, 114);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.815);
 }
 
 #boton-tema {
@@ -68,9 +68,8 @@ header {
 
 /* PAGINA BIENVENIDA */
 main {
-  margin-left: 400px;
-  margin-right: 400px;
-  margin-top: 40px;
+  max-width: 800px;
+  margin: 40px auto 0 auto;
   text-align: center;
   background-color: rgba(30, 12, 46, 0.363);
   padding: 50px;
@@ -126,18 +125,9 @@ main {
 .boton-continuar-nombre:hover {
   background-color: #eeeeee;
 }
-
-#boton-tema:hover {
-  background-color: #00ffccb4;
-  color:#000000d7;
-}
-/* FIN PAGINA BIENVENIDA (Jeanette) */ 
-
-
-/*SECCION PRODUCTOS (ESTEBAN) PRINCIPIO*/
-#saludo-cliente{
+/* SECCION PRODUCTOS */
+#saludo-cliente {
   font-size: 1rem;
-
   color: #00ffcc;
   font-family: "Orbitron", sans-serif;
 }
@@ -146,43 +136,13 @@ main {
   padding: 20px;
 }
 
-.card-producto {
-  border: 1px solid #00ffccc9;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.card-producto img {
-  width: 100px;
-  border-radius: 5px;
-  height: 120px;
-}
-
-.card-producto h3 {
-  font-size: 1rem;
-  margin: 10px 0;
-  color: #00ffcc;
-  font-family: "Orbitron", sans-serif;
-}
-
-.card-producto p {
-  font-size: 1rem;
-  font-family: "Press Start 2P", system-ui;
-  font-weight: 500;
-  color: #00ffccc9;
-  text-shadow: 0 0 12px rgba(0, 255, 204, 0.404);
-  font-size: 15px;
-  margin-bottom: 15px;
-}
-
 .contenedor-productos {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 20px;
   padding: 20px;
 }
+
 .card-producto {
   padding: 10px;
   text-align: center;
@@ -195,17 +155,20 @@ main {
   justify-content: space-between;
   align-items: center;
 }
+
 .card-producto img {
   width: 100px;
   border-radius: 5px;
   height: 120px;
 }
+
 .card-producto h3 {
   font-size: 1rem;
   margin: 10px 0;
   color: #00ffcc;
   font-family: "Orbitron", sans-serif;
 }
+
 .card-producto p {
   font-size: 15px;
   font-family: "Press Start 2P", system-ui;
@@ -215,36 +178,31 @@ main {
   margin-bottom: 15px;
 }
 
-.agregar-carrito{
+.agregar-carrito,
+.eliminar-carrito {
   cursor: pointer;
   padding: 6px 12px;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.agregar-carrito {
   background-color: #28a745;
-  border: none;
-  color: white;
-  border-radius: 5px;
-  margin-top: 10px;
 }
-
-.eliminar-carrito{
-  cursor: pointer;
-  padding: 6px 12px;
-  background-color: #c72828;
-  border: none;
-  color: white;
-  border-radius: 5px;
-  margin-top: 10px;
-}
-
 .agregar-carrito:hover {
   background-color: #218838;
 }
 
+.eliminar-carrito {
+  background-color: #c72828;
+}
 .eliminar-carrito:hover {
   background-color: #c72828c9;
 }
 
-/* ACA MODIFIQUE YO */
-.botones-orden-productos button{
+.botones-orden-productos button {
   cursor: pointer;
   background-color: rgb(97, 7, 97);
   color: white;
@@ -257,6 +215,7 @@ main {
 .botones-orden-productos button:hover {
   background-color: rgba(97, 7, 97, 0.473);
 }
+
 #texto-producto {
   font-family: "Press Start 2P", system-ui;
   font-weight: 500;
@@ -264,13 +223,11 @@ main {
   text-shadow: 0 0 12px rgba(0, 255, 204, 0.404);
   font-size: 30px;
   margin-bottom: 15px;
+  word-wrap: break-word;
 }
 
-/*SECCION PRODUCTOS (ESTEBAN) FINAL */
-
-
-/* PARA LAS OTRAS PANTALLAS */
-#listado-nav{
+/* NAV */
+#listado-nav {
   padding-top: 15px;
   display: flex;
   justify-content: center;
@@ -285,7 +242,111 @@ main {
   margin-right: 15px;
 }
 
-/* RESPONSIVE */
+/* CARRITO - ESTILO TABLA */
+.seccion-carrito {
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #241531;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
+  font-family: "Orbitron", sans-serif;
+  color: #00ffcc;
+}
+
+.tabla-carrito {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #241531;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tabla-carrito thead {
+  background-color: #1a1a1a;
+  color: #00ffcc;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.tabla-carrito th,
+.tabla-carrito td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #00ffcc88;
+}
+
+.tabla-carrito tbody tr:hover {
+  background-color: #333;
+}
+
+.tabla-carrito td:nth-child(2),
+.tabla-carrito td:nth-child(3),
+.tabla-carrito td:nth-child(4) {
+  text-align: center;
+  width: 20%;
+}
+
+.tabla-carrito button {
+  background-color: #00ffccaa;
+  border: none;
+  color: #241531;
+  padding: 6px 12px;
+  margin: 0 4px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+.tabla-carrito button:hover {
+  background-color: #00bfa5;
+  color: white;
+}
+
+#precio-total {
+  margin-top: 15px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: right;
+  color: #00ffcc;
+  text-shadow: 0 0 10px rgb(0, 255, 204);
+}
+
+.seccion-carrito > div {
+  width: 100%;
+  max-width: 900px;
+  margin: 20px auto 40px;
+  text-align: center;
+}
+
+.seccion-carrito button#vaciar-carrito,
+.seccion-carrito button#confirmar-compra {
+  background-color: #00ffccaa;
+  color: #241531;
+  border: none;
+  padding: 10px 22px;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 6px;
+  margin: 0 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.seccion-carrito button#vaciar-carrito:hover,
+.seccion-carrito button#confirmar-compra:hover {
+  background-color: #00bfa5;
+  color: white;
+}
+
+#carrito-vacio {
+  text-align: center;
+  font-size: 18px;
+  color: #ffffffbb;
+  margin-top: 30px;
+  font-family: "Orbitron", sans-serif;
+}
+/* RESPONSIVE GENERAL */
 @media (max-width: 768px) {
   main {
     margin: 40px;
@@ -316,7 +377,7 @@ main {
     margin-top: 10px;
     font-size: 10px;
   }
-  .boton-tema {
+  #boton-tema {
     margin: 70px 0 0 10px;
     font-size: 10px;
   }
@@ -324,125 +385,13 @@ main {
     width: 60px;
     height: 60px;
   }
+  #texto-producto {
+    font-size: 18px;
+    word-break: break-word;
+  }
 }
 
-/* SECCION CARRITO ESTILIZADA COMO TABLA */
-.seccion-carrito {
-  padding: 20px;
-  max-width: 900px;
-  margin: 0 auto;
-  background-color: #241531;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
-  font-family: "Orbitron", sans-serif;
-  color: #00ffcc;
-}
-
-/* Tabla carrito */
-.tabla-carrito {
-  width: 100%;
-  border-collapse: collapse;
-  background-color: #241531;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.tabla-carrito thead {
-  background-color: #1a1a1a;
-  color: #00ffcc;
-  font-weight: 700;
-  font-size: 1rem;
-}
-
-.tabla-carrito th,
-.tabla-carrito td {
-  padding: 12px 15px;
-  text-align: left;
-  border-bottom: 1px solid #00ffcc88;
-}
-
-.tabla-carrito tbody tr:hover {
-  background-color: #333;
-}
-
-.tabla-carrito td:nth-child(2),
-.tabla-carrito td:nth-child(3) {
-  text-align: center;
-  width: 15%;
-}
-
-.tabla-carrito td:nth-child(4) {
-  text-align: center;
-  width: 20%;
-}
-
-/* Botones en la tabla */
-.tabla-carrito button {
-  background-color: #00ffccaa;
-  border: none;
-  color: #241531;
-  padding: 6px 12px;
-  margin: 0 4px;
-  font-weight: bold;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
-}
-
-.tabla-carrito button:hover {
-  background-color: #00bfa5;
-  color: white;
-}
-
-/* Total del precio */
-#precio-total {
-  margin-top: 15px;
-  font-size: 1.3rem;
-  font-weight: 700;
-  text-align: right;
-  color: #00ffcc;
-  text-shadow: 0 0 10px rgb(0, 255, 204);
-}
-
-/* Botones vaciar y confirmar */
-.seccion-carrito > div {
-  width: 100%;
-  max-width: 900px;
-  margin: 20px auto 40px;
-  text-align: center;
-}
-
-.seccion-carrito button#vaciar-carrito,
-.seccion-carrito button#confirmar-compra {
-  background-color: #00ffccaa;
-  color: #241531;
-  border: none;
-  padding: 10px 22px;
-  font-size: 1rem;
-  font-weight: 700;
-  border-radius: 6px;
-  margin: 0 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.seccion-carrito button#vaciar-carrito:hover,
-.seccion-carrito button#confirmar-compra:hover {
-  background-color: #00bfa5;
-  color: white;
-}
-
-/* Mensaje carrito vacío */
-#carrito-vacio {
-  text-align: center;
-  font-size: 18px;
-  color: #ffffffbb;
-  margin-top: 30px;
-  font-family: "Orbitron", sans-serif;
-}
-
-/* Responsive */
+/* RESPONSIVE PARA CARRITO */
 @media (max-width: 600px) {
   .tabla-carrito, #precio-total, .seccion-carrito > div {
     width: 95%;
@@ -476,6 +425,7 @@ main {
   z-index: 9999;
   backdrop-filter: blur(4px);
 }
+
 .modal-contenido {
   background-color: #241531;
   padding: 25px 30px;
@@ -490,6 +440,7 @@ main {
   font-size: 18px;
   text-shadow: 0 0 10px rgba(0, 255, 204, 0.7);
 }
+
 #cerrar-modal {
   margin-top: 20px;
   background-color: #00ffcc;
@@ -503,8 +454,62 @@ main {
   box-shadow: 0 0 15px rgba(0, 255, 204, 0.8);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+
 #cerrar-modal:hover {
   background-color: #218838;
   color: white;
   box-shadow: 0 0 25px rgba(33, 136, 56, 0.9);
+}
+@media (max-width: 600px) {
+  .seccion-carrito {
+    padding: 10px;
+    margin: 20px 10px;
+    box-shadow: none;
+  }
+
+  .tabla-carrito {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 8px;
+  }
+
+  .tabla-carrito table {
+    width: 600px; /* ancho mínimo para evitar que las celdas se amontonen */
+  }
+
+  .tabla-carrito th,
+  .tabla-carrito td {
+    padding: 8px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  .tabla-carrito thead {
+    font-size: 0.9rem;
+  }
+
+  .tabla-carrito button {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+  }
+
+  #precio-total {
+    text-align: center;
+    font-size: 1.1rem;
+    margin-top: 10px;
+  }
+
+  .seccion-carrito > div {
+    margin: 10px auto;
+  }
+
+  .seccion-carrito button#vaciar-carrito,
+  .seccion-carrito button#confirmar-compra {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 1rem;
+  }
 }
